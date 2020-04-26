@@ -1,0 +1,337 @@
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  variables
+   2          s       ;
+   3   
+   4  positive variables
+   5          a
+   6          b
+   7          c
+   8          alpha
+   9          beta
+  10          n       ;
+  11   
+  12  Equations
+  13          one
+  14          two
+  15          three
+  16          four
+  17          five
+  18          six
+  19          triangle1
+  20          triangle2
+  21          triangle3
+  22          con1
+  23          con2
+  24          con3
+  25          ss      ;
+  26   
+  27  one .. (1 + alpha) * (n - (alpha/(1 + alpha + 0.0000001)*a)**2) =g= (1 + beta)*(n - (beta/(1 + beta + 0.0000001)*c)**2);
+  28  two .. (alpha + beta)*(n - (beta/(alpha + beta + 0.0000001)*b)**2) =g= (1 + alpha)*(n - (1/(1 + alpha + 0.0000001)*a)**2);
+  29  three .. (1 + beta)*(n - (1/(1 + beta + 0.0000001)*c)**2) =g= (alpha + beta)*(n - (alpha/(alpha + beta + 0.0000001)*b)**2);
+  30  four .. (1 + beta)*(n - (beta/(1 + beta + 0.0000001)*c)**2) =g= 1;
+  31  five .. (1 + alpha)*(n - (1/(1 + alpha + 0.0000001)*a)**2) =g= alpha;
+  32  six .. (alpha + beta)*(n - (alpha/(alpha + beta + 0.0000001)*b)**2) =g= beta;
+  33  triangle1 .. a + b =g= c;
+  34  triangle2 .. a + c =g= b;
+  35  triangle3 .. b + c =g= a;
+  36  con1 .. a =l= sqrt(2);
+  37  con2 .. b =l= sqrt(2);
+  38  con3 .. c =l= sqrt(2);
+  39  ss .. s =e= n;
+  40   
+  41  Model inequalities /all/;
+  42  solve inequalities using NLP minimizing s;
+
+
+COMPILATION TIME     =        0.000 SECONDS      2 MB  24.3.3 r48116 DEX-DEG
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE inequalities Using NLP From line 42
+
+
+---- one  =G=  
+
+one..  (0)*a + (0)*c + (0)*alpha + (0)*beta + (0)*n =G= 0 ; (LHS = 0)
+     
+
+---- two  =G=  
+
+two..  (0)*a + (0)*b + (0)*alpha + (0)*beta - (1)*n =G= 0 ; (LHS = 0)
+     
+
+---- three  =G=  
+
+three..  (0)*b + (0)*c + (0)*alpha + (0)*beta + (1)*n =G= 0 ; (LHS = 0)
+     
+
+---- four  =G=  
+
+four..  (0)*c + (0)*beta + (1)*n =G= 1 ; (LHS = 0, INFES = 1 ****)
+     
+
+---- five  =G=  
+
+five..  (0)*a - (1)*alpha + (1)*n =G= 0 ; (LHS = 0)
+     
+
+---- six  =G=  
+
+six..  (0)*b + (0)*alpha - (1)*beta + (0)*n =G= 0 ; (LHS = 0)
+     
+
+---- triangle1  =G=  
+
+triangle1..  a + b - c =G= 0 ; (LHS = 0)
+     
+
+---- triangle2  =G=  
+
+triangle2..  a - b + c =G= 0 ; (LHS = 0)
+     
+
+---- triangle3  =G=  
+
+triangle3..  - a + b + c =G= 0 ; (LHS = 0)
+     
+
+---- con1  =L=  
+
+con1..  a =L= 1.4142135623731 ; (LHS = 0)
+     
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE inequalities Using NLP From line 42
+
+
+---- con2  =L=  
+
+con2..  b =L= 1.4142135623731 ; (LHS = 0)
+     
+
+---- con3  =L=  
+
+con3..  c =L= 1.4142135623731 ; (LHS = 0)
+     
+
+---- ss  =E=  
+
+ss..  s - n =E= 0 ; (LHS = 0)
+     
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE inequalities Using NLP From line 42
+
+
+---- s  
+
+s
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       ss
+
+
+---- a  
+
+a
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      one
+       (0)      two
+       (0)      five
+        1       triangle1
+        1       triangle2
+       -1       triangle3
+        1       con1
+
+
+---- b  
+
+b
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      two
+       (0)      three
+       (0)      six
+        1       triangle1
+       -1       triangle2
+        1       triangle3
+        1       con2
+
+
+---- c  
+
+c
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      one
+       (0)      three
+       (0)      four
+       -1       triangle1
+        1       triangle2
+        1       triangle3
+        1       con3
+
+
+---- alpha  
+
+alpha
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      one
+       (0)      two
+       (0)      three
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE inequalities Using NLP From line 42
+
+
+     alpha  
+
+      (-1)      five
+       (0)      six
+
+
+---- beta  
+
+beta
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      one
+       (0)      two
+       (0)      three
+       (0)      four
+      (-1)      six
+
+
+---- n  
+
+n
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      one
+      (-1)      two
+       (1)      three
+       (1)      four
+       (1)      five
+       (0)      six
+       -1       ss
+
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE inequalities Using NLP From line 42
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          13     SINGLE EQUATIONS           13
+BLOCKS OF VARIABLES           7     SINGLE VARIABLES            7
+NON ZERO ELEMENTS            39     NON LINEAR N-Z             25
+DERIVATIVE POOL              10     CONSTANT POOL              18
+CODE LENGTH                 128
+
+
+GENERATION TIME      =        0.002 SECONDS      3 MB  24.3.3 r48116 DEX-DEG
+
+
+EXECUTION TIME       =        0.002 SECONDS      3 MB  24.3.3 r48116 DEX-DEG
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE inequalities Using NLP From line 42
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   inequalities        OBJECTIVE  s
+     TYPE    NLP                 DIRECTION  MINIMIZE
+     SOLVER  CONOPT              FROM LINE  42
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      5 Locally Infeasible        
+**** OBJECTIVE VALUE                0.0000
+
+ RESOURCE USAGE, LIMIT          0.016      1000.000
+ ITERATION COUNT, LIMIT         3    2000000000
+ EVALUATION ERRORS              0             0
+CONOPT 3         24.3.3 r48116 Released Sep 19, 2014 DEG x86 64bit/MacOS X    
+ 
+ 
+    C O N O P T 3   version 3.16C
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+    The model has 7 variables and 13 constraints
+    with 39 Jacobian elements, 25 of which are nonlinear.
+    The Hessian of the Lagrangian has 5 elements on the diagonal,
+    7 elements below the diagonal, and 6 nonlinear variables.
+ 
+ ** Warning **  The number of nonlinear derivatives equal to zero
+                in the initial point is large (= 48 percent).
+                A better initial point will probably help the
+                optimization.
+ 
+ 
+ ** Infeasible solution. There are no superbasic variables.
+ 
+ 
+ ** Warning **  The number of nonlinear derivatives equal to zero
+                in the final point is large (= 36 percent).
+                Better bounds on the variables may help the
+                optimization.
+ 
+ 
+ CONOPT time Total                            0.013 seconds
+   of which: Function evaluations             0.000 =  0.0%
+             1st Derivative evaluations       0.000 =  0.0%
+ 
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU one                 .              .            +INF             .          
+---- EQU two                 .              .            +INF            1.0000      
+---- EQU three               .              .            +INF             .          
+---- EQU four               1.0000          .            +INF            1.0000 INFES
+GAMS 24.3.3  r48116 Released Sep 19, 2014 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    09/26/16 20:10:02 Page 8
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE inequalities Using NLP From line 42
+
+
+---- EQU five                .              .            +INF            EPS         
+---- EQU six                 .              .            +INF            EPS         
+---- EQU triangle1           .              .            +INF            EPS         
+---- EQU triangle2           .              .            +INF            EPS         
+---- EQU triangle3           .              .            +INF            EPS         
+---- EQU con1              -INF             .             1.4142          .          
+---- EQU con2              -INF             .             1.4142          .          
+---- EQU con3              -INF             .             1.4142          .          
+---- EQU ss                  .              .              .             EPS         
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR s                 -INF             .            +INF             .          
+---- VAR a                   .              .            +INF             .          
+---- VAR b                   .              .            +INF             .          
+---- VAR c                   .              .            +INF             .          
+---- VAR alpha               .              .            +INF             .          
+---- VAR beta                .              .            +INF             .          
+---- VAR n                   .              .            +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             1 INFEASIBLE (INFES)
+                    SUM          1.0000
+                    MAX          1.0000
+                    MEAN         1.0000
+                             0  UNBOUNDED
+                             0     ERRORS
+
+
+EXECUTION TIME       =        0.001 SECONDS      2 MB  24.3.3 r48116 DEX-DEG
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      /Users/Qing/Desktop/inequalities.gms
+Output     /Applications/GAMS/gams24.3_osx_x64_64_sfx/inequalities.lst

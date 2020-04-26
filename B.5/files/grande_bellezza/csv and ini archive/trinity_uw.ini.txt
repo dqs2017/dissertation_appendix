@@ -1,0 +1,36 @@
+[Distributions]
+A = Random Power,
+C = Random Power,
+B = Random Power,
+
+[IssueNames]
+Y = Y
+X = X
+Z = Z
+
+[AgentNames]
+A = A
+C = C
+B = B
+
+[Config]
+Runs = 1000
+UseWeights = False
+Initial Coalitions = A B C
+Agents = 3
+Mode = Multiple
+Max Depth = 6
+Alpha = 2.7
+Voting = Unanimous
+Issues = 3
+
+[Positions]
+A,Z = Random Position,
+A,X = Random Position,
+A,Y = Random Position,
+B,Y = Random Position,
+B,X = Random Position,
+B,Z = Random Position,
+C,X = Random Position,
+C,Y = Random Position,
+C,Z = Random Position,
